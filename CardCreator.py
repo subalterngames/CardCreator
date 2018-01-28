@@ -1,15 +1,47 @@
 #!/usr/bin/python
-# -*- coding: cp1252 -*-
 
 import pygame
 import os
-import time
 import csv
 from shutil import copyfile
 from fpdf import FPDF
 import getopt
 import sys
-from Differ import OutputDifferences
+
+# Set the directories.
+# root_dir is the directory of this file.
+root_dir = os.path.dirname(os.path.abspath(__file__))
+# All input files will be found here.
+input_root_dir = root_dir + "/Input/"
+# All output files will be found here.
+output_root_dir = root_dir + "/Output/"
+# Fonts directory
+fonts_dir = input_root_dir + "Fonts/"
+# Images directory
+images_dir = input_root_dir + "Images/"
+# Backgrounds directory
+images_bg_dir = images_dir + "Backgrounds/"
+# Foregrounds directory
+images_fg_dir = images_dir + "Foregrounds/"
+# Config file path
+config_path = input_root_dir + "config.ini"
+# The csv file path
+csv_path = input_root_dir + "cards.csv"
+
+# Read the config file
+config_file = open(config_path, 'r')
+config_lines = config_file.readlines()
+config_file.close()
+# Parse the lines of the config file
+config_data = dict()
+for line in config_lines:
+    # Split the at the = sign
+    split_line = line.split("=")
+    # Strip the later value of the escape character.
+    split_line[1] = split_line[1].replace('\n', '')
+    # Add the data to the dict.
+    config_data.update({split_line[0]:split_line[1]})
+
 
 # Centers text within a box
 def CenterText(lbl,x,y,w,h):
