@@ -152,7 +152,7 @@ for card_row in card_rows:
 
     # Create the card.
     # Load the background.
-    bg = pygame.image.load(images_bg_dir + bg_image_file)
+    bg = pygame.image.load(images_bg_dir + bg_image_file + ".png")
     # Create the header label.
     header_label = header_font.render(header_text, True, black)
     header_label_y = header_pad_y
@@ -161,7 +161,7 @@ for card_row in card_rows:
     # Blit the header onto the background.
     bg.blit(header_label, header_pos)
     # Load the foreground.
-    fg = pygame.image.load(images_fg_dir + fg_image_file)
+    fg = pygame.image.load(images_fg_dir + fg_image_file + ".png")
     # The foreground y position is the y position of the header, the height of the header, and the fg padding.
     fg_y = header_label_y + header_label.get_height() + fg_pad_y
     fg_x = get_surface_centered_x(bg, fg)
