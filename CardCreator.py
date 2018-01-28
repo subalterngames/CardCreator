@@ -202,8 +202,8 @@ if output_to_pdf:
     pdf.set_margins(2,10)
     # Get all of the image filepaths.
     images = os.listdir(output_root_dir)
-    start_x = 0
-    start_y = 0
+    start_x = 1
+    start_y = 1
     x = start_x
     y = start_y
 
@@ -212,10 +212,10 @@ if output_to_pdf:
         width = card[1] / dpi
         height = card[2] / dpi    
         if x + width >= 8:
-            x = 0
+            x = start_x
             y += height
-            if y > 10:
-                y = 0
+            if y > 8:
+                y = start_y
                 pdf.add_page()
         pdf.image(path, x = x, y = y, w = width, h = height)
         x += width
