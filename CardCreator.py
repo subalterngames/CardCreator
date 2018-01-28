@@ -12,7 +12,7 @@ import sys
 def get_surface_centered_x(bg, surface):
     bg_width = bg.get_width()
     surface_width = surface.get_width()
-    return (bg_width - surface_width()) / 2
+    return (bg_width - surface_width) / 2
 
 def truncline(text, font, maxwidth):
         real=len(text)
@@ -48,12 +48,15 @@ def wrap_line(text, font, maxwidth):
     return wrapped
 
 def get_wrapped_labels(text, font, maxwidth):
-    lines = wrapline(text, font, maxwidth)
+    lines = wrap_line(text, font, maxwidth)
     fonts = []
     for line in lines:
         f = font.render(line, True, black)
         fonts.append(f)
     return fonts
+
+# Init pygame.
+pygame.init()
 
 # Set the directories.
 # root_dir is the directory of this file.
@@ -120,8 +123,7 @@ body_font = pygame.font.Font(fonts_dir + body_font_file, body_font_size)
 
 # Read the CSV file.
 card_rows = []
-data_path = data_dir + "cards.csv"
-with open(data_path, 'r') as csvfile:
+with open(csv_path, 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t')
     count = 0
     for row in reader:
@@ -135,9 +137,6 @@ filesToRemove = [f for f in os.listdir(output_root_dir) if f.endswith(".png") or
 for f in filesToRemove:
     os.remove(output_root_dir + f)
 
-# Init pygame.
-pygame.init()
-
 card_data = []
 
 # Read the cards.
@@ -147,7 +146,7 @@ for card_row in card_rows:
     body_text = card_row[1]
     fg_image_file = card_row[2]
     bg_image_file = card_row[3]
-    num_copies = card_row[4]
+    num_copies = int(card_row[4])
     filename = card_row[5]
 
     # Create the card.
@@ -169,7 +168,7 @@ for card_row in card_rows:
     # Blit the foreground onto the background.
     bg.blit(fg, fg_pos)
     # Create the body labels
-    body_width = bg.get_width - (body_pad_x / 2)
+    body_width = bg.get_width() - (body_pad_x * 2)
     body_labels = get_wrapped_labels(body_text, body_font, body_width)
     body_x = body_pad_x
     # The body y position starts at the foreground y position plus the foreground's height plus padding.
