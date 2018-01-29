@@ -19,7 +19,18 @@
 
 #### SETUP ####
 
-1. Set up the config file (see code for what each line does)
+1. Set up the config file
+	header_font_size: Size of the header font
+	header_font: File name for the header font (be sure to include the file extension). This file must be in Input/Fonts
+	header_y: y (vertical) position of the the header text. 0 = the absolute top of the card.
+	fg_y: y position of the foreground image.
+	body_font_size: Size of the body font
+	body_font: File name for the body font (be sure to include the file extension). This file must be in Input/Fonts
+	body_y: y position of the body text.
+	body_width_percent: The width of the body text as a percentage of the width of the card. (If this is less than 1, there will be some padding on the sides of the body text.)
+	body_line_spacing: Spacing between lines of body text, as a percentage of the font size.
+	output_to_pdf: 1 = create a pdf file
+	dpi: Image resolution on the pdf
 2. Add your foreground images to the foreground folder. They must all be .png
 3. Add your background images to the background folder. They must all be .png
 4. Add the text cards.csv (don't add file extensions)

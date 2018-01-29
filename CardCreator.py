@@ -98,20 +98,20 @@ for line in config_lines:
 header_font_size = int(config_data["header_font_size"])
 # Filename of the header font.
 header_font_file = config_data["header_font"]
-# Margin from the top of the card to the header text.
-header_pad_y = int(config_data["header_pad_y"])
+# y value of the header text.
+header_y = int(config_data["header_y"])
 # Margin from the header text to the foreground image
-fg_pad_y = int(config_data["fg_pad_y"])
+fg_y = int(config_data["fg_y"])
 # Font size of the body text.
 body_font_size = int(config_data["body_font_size"])
 # Filename of the body font.
 body_font_file = config_data["body_font"]
 # Padding between the edge of the card and the body text.
-body_pad_x = int(config_data["body_pad_x"])
+body_width_percent = float(config_data["body_width_percent"])
 # Padding between the bottom of the foreground image and the body text.
-body_pad_y = int(config_data["body_pad_y"])
+body_y = int(config_data["body_y"])
 # Spacing between lines.
-body_line_spacing = int(config_data["body_line_spacing"])
+body_line_spacing = float(config_data["body_line_spacing"])
 # Whether or not to output to pdf.
 output_to_pdf = config_data["output_to_pdf"] == '1'
 dpi = int(config_data["dpi"])
@@ -156,31 +156,26 @@ for card_row in card_rows:
     bg = pygame.image.load(images_bg_dir + bg_image_file + ".png")
     # Create the header label.
     header_label = header_font.render(header_text, True, black)
-    header_label_y = header_pad_y
-    header_label_x = get_surface_centered_x(bg, header_label)
-    header_pos = (header_label_x, header_label_y)
+    header_x = get_surface_centered_x(bg, header_label)
+    header_pos = (header_x, header_y)
     # Blit the header onto the background.
     bg.blit(header_label, header_pos)
     # Load the foreground.
     fg = pygame.image.load(images_fg_dir + fg_image_file + ".png")
-    # The foreground y position is the y position of the header, the height of the header, and the fg padding.
-    fg_y = header_label_y + header_label.get_height() + fg_pad_y
     fg_x = get_surface_centered_x(bg, fg)
     fg_pos = (fg_x, fg_y)
     # Blit the foreground onto the background.
     bg.blit(fg, fg_pos)
     # Create the body labels
-    body_width = bg.get_width() - (body_pad_x * 2)
+    body_width = bg.get_width() * body_width_percent
     body_labels = get_wrapped_labels(body_text, body_font, body_width)
     body_x = body_pad_x
-    # The body y position starts at the foreground y position plus the foreground's height plus padding.
-    body_y = fg_y + fg.get_height() + body_pad_y
     # Blit each body label onto the background.
     for body_label in body_labels:
         body_label_pos = (body_x, body_y)
         bg.blit(body_label, body_label_pos)
         # Update the y position.
-        body_y += body_line_spacing
+        body_y += body_font_size * body_line_spacing
     # Output the card a certain number of times.
     filepath_base = output_root_dir + filename
     # Store the card a given number of times.
