@@ -48,11 +48,13 @@ def wrap_line(text, font, maxwidth):
     return wrapped
 
 def get_wrapped_labels(text, font, maxwidth):
-    lines = wrap_line(text, font, maxwidth)
+    text_chunks = text.split("\n")
     fonts = []
-    for line in lines:
-        f = font.render(line, True, black)
-        fonts.append(f)
+    for chunk in text_chunks:
+        lines = wrap_line(chunk, font, maxwidth)
+        for line in lines:
+            f = font.render(line, True, black)
+            fonts.append(f)
     return fonts
 
 # Init pygame.
