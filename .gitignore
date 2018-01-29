@@ -40,3 +40,7 @@ Assets/UnityVS.meta
 .ssh/
 *.~lock.*
 dist/*
+Input/Images/Foregrounds/*.*
+Input/Images/Backgrounds/*.*
+Output/*.*
+Input/Fonts/*.*

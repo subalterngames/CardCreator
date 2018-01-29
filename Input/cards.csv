@@ -1,6 +1,1 @@
-"HEADER_TEXT"	"BODY_TEXT"	"FG_IMAGE_FILE"	"BG_IMAGE_FILE"	"NUM_COPIES"	"FILENAME"
-"Fireball"	"+2 Attack"	"fireball"	"spell"	4	"fireball"
-"Proper Citations"	"+2 on your next critical analysis roll"	"citation"	"spell"	2	"proper_citation"
-"Orc"	"+2 Attack for everyone in
- your party.
-+3 party sex appeal."	"orc"	"character"	10	"orc"
+HEADER_TEXT	BODY_TEXT	FG_IMAGE_FILE	BG_IMAGE_FILE	NUM_COPIES	FILENAME

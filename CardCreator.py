@@ -76,7 +76,7 @@ images_bg_dir = images_dir + "Backgrounds/"
 # Foregrounds directory
 images_fg_dir = images_dir + "Foregrounds/"
 # Config file path
-config_path = input_root_dir + "config.ini"
+config_path = root_dir + "config.ini"
 # The csv file path
 csv_path = input_root_dir + "cards.csv"
 
