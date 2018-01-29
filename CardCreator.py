@@ -76,7 +76,7 @@ images_bg_dir = images_dir + "Backgrounds/"
 # Foregrounds directory
 images_fg_dir = images_dir + "Foregrounds/"
 # Config file path
-config_path = root_dir + "config.ini"
+config_path = root_dir + "/config.ini"
 # The csv file path
 csv_path = input_root_dir + "cards.csv"
 
@@ -169,13 +169,14 @@ for card_row in card_rows:
     # Create the body labels
     body_width = bg.get_width() * body_width_percent
     body_labels = get_wrapped_labels(body_text, body_font, body_width)
-    body_x = body_pad_x
+    body_x = bg.get_width() - body_width
+    body_y_this_card = body_y
     # Blit each body label onto the background.
     for body_label in body_labels:
-        body_label_pos = (body_x, body_y)
+        body_label_pos = (body_x, body_y_this_card)
         bg.blit(body_label, body_label_pos)
         # Update the y position.
-        body_y += body_font_size * body_line_spacing
+        body_y_this_card += body_font_size * body_line_spacing
     # Output the card a certain number of times.
     filepath_base = output_root_dir + filename
     # Store the card a given number of times.
